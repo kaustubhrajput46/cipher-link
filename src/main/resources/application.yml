@@ -1,0 +1,38 @@
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:local-pki/server-keystore.p12
+    key-store-password: ${SERVER_KEYSTORE_PASSWORD:serverpass}
+    key-store-type: PKCS12
+    key-alias: server
+    trust-store: classpath:local-pki/server-truststore.p12
+    trust-store-type: PKCS12
+    trust-store-password: ${TRUSTSTORE_PASSWORD:trustpass}
+    # want = optional client cert, need = required, none = no client cert
+    client-auth: want
+    # Enforce strong TLS protocols
+    enabled-protocols:
+      - TLSv1.3
+      - TLSv1.2
+    # Prefer strong cipher suites
+    ciphers:
+      - TLS_AES_256_GCM_SHA384
+      - TLS_AES_128_GCM_SHA256
+      - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+      - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+
+spring:
+  application:
+    name: cipher-link-server
+
+logging:
+  level:
+    root: INFO
+    com.cipherlink: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    javax.net.ssl: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+

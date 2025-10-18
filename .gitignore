@@ -1,0 +1,19 @@
+# Certificates and keys
+local-pki/
+*.p12
+*.pem
+*.key
+*.crt
+
+# misc documentation
+misc/
+
+# Maven
+target/
+
+# IntelliJ
+.idea/
+*.iml
+
+# OS
+.DS_Store
